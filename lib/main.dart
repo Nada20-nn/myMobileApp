@@ -3,13 +3,11 @@ import 'package:mobileproj/home/home_page/home_page.dart';
 
 
 
-
-
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget {//no inter
   const MyApp({super.key});
 
   @override

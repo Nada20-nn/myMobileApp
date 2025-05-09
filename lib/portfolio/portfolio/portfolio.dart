@@ -11,7 +11,7 @@ class MobilePhone {
   final double price;
   final String serialNumber;
 
-  // Default Constructor
+  //Const
   MobilePhone({
     required this.brand,
     required this.model,
@@ -20,16 +20,16 @@ class MobilePhone {
     required this.serialNumber,
   });
 
-  // Named Constructor (assign default storage if null)
+  // Named Constr
   MobilePhone.withDefaultStorage({
     required this.brand,
     required this.model,
     int? storage,
     this.price = 0.0,
     required this.serialNumber,
-  }) : storage = storage ?? 64; // default 64GB if null
+  }) : storage = storage ?? 64; 
 
-  // Constant Constructor
+  // Const constr
   const MobilePhone.constant({
     required this.brand,
     required this.model,
@@ -38,13 +38,13 @@ class MobilePhone {
     required this.serialNumber,
   });
 
-  // toString method
+  
   @override
   String toString() {
     return 'MobilePhone(brand: $brand, model: $model, storage: ${storage ?? "Unknown"} GB, price: \$$price, serialNumber: $serialNumber)';
   }
 
-  // Copy method
+  
   MobilePhone copyWith({
     String? brand,
     String? model,
@@ -61,8 +61,7 @@ class MobilePhone {
     );
   }
 }
-
-// ==================== UI Part ====================
+////////////
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
 
@@ -71,26 +70,26 @@ class PortfolioScreen extends StatefulWidget {
 }
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
-  String imagePath = 'assets/nada1.jpg'; // First image
+  String imagePath = 'assets/nada1.jpg'; 
 
   void changeImage() {
     setState(() {
       imagePath =
           imagePath == 'assets/nada1.jpg'
               ? 'assets/nada2.jpg'
-              : 'assets/nada1.jpg'; // Toggle between two images
+              : 'assets/nada1.jpg'; // Toggling
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // Example usage of MobilePhone logic
+    
     MobilePhone myPhone = MobilePhone.withDefaultStorage(
       brand: "Apple",
       model: "iPhone 15",
       price: 20000.99,
       serialNumber: "XYZ123456",
-    )..toString(); // Using cascade operator
+    )..toString(); 
     
 
     return Scaffold(

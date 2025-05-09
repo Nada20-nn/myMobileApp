@@ -10,6 +10,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  
   final ImagePicker imagePicker = ImagePicker();
   File? selectedImage;
 
@@ -132,28 +133,6 @@ class _ProfilePageState extends State<ProfilePage> {
             const Text(
               'nada@gmail.com',
               style: TextStyle(color: Colors.grey),
-            ),
-            const SizedBox(height: 24),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Edit Profile'),
-              onTap: () {
-                // Handle edit action
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                // Handle settings
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
-              onTap: () {
-                // Handle logout
-              },
             ),
           ],
         ),
