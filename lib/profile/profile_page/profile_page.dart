@@ -1,6 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobileproj/profile/user_model.dart';
+import '../profile_widget/options.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -11,7 +14,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   
-  final ImagePicker imagePicker = ImagePicker();
+  ImagePicker imagePicker = ImagePicker();
   File? selectedImage;
 
   Future<void> selectImage(ImageSource source) async {
@@ -42,87 +45,91 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           children: [
             Center(
-              child: Stack(
-                alignment: Alignment.bottomRight,
-                children: [
-                  CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    radius: 100,
-                    child: selectedImage == null
-                        ? const Icon(Icons.person, size: 100)
-                        : ClipOval(
-                            child: Image.file(
-                              selectedImage!,
-                              width: 200,
-                              height: 200,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.black,
-                    radius: 25,
-                    child: IconButton(
-                      color: Colors.white,
-                      icon: const Icon(Icons.camera_alt, size: 25),
-                      onPressed: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) => Container(
-                            padding: const EdgeInsets.all(16),
-                            height: 180,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Text(
-                                  'Choose Profile Photo',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+              child: Consumer<UserModel>(//rebuild lma yhsal t8yerat w2t changeNotifier w class bta3ha
+                builder: (context, userModel, child) {
+                  return Stack(
+                    alignment: Alignment.bottomRight,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        radius: 100,
+                        child: userModel.user?.image == null
+                            ? const Icon(Icons.person, size: 100)
+                            : ClipOval(
+                                child: Image.file(
+                                  userModel.user!.image!,
+                                  width: 200,
+                                  height: 200,
+                                  fit: BoxFit.cover,
                                 ),
-                                const Divider(),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                              ),
+                      ),
+                      CircleAvatar(
+                        backgroundColor: Colors.black,
+                        radius: 25,
+                        child: IconButton(
+                          color: Colors.white,
+                          icon: const Icon(Icons.camera_alt, size: 25),
+                          onPressed: () {
+                            showModalBottomSheet(
+                              context: context,
+                              builder: (context) => Container(
+                                padding: const EdgeInsets.all(16),
+                                height: 180,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    ProfileOptionButton(
-                                      icon: Icons.camera_alt,
-                                      label: 'Camera',
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        selectImage(ImageSource.camera);
-                                      },
+                                    const Text(
+                                      'Choose Profile Photo',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                      ),
                                     ),
-                                    ProfileOptionButton(
-                                      icon: Icons.photo,
-                                      label: 'Gallery',
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        selectImage(ImageSource.gallery);
-                                      },
-                                    ),
-                                    if(selectedImage!=null)
-                                    ProfileOptionButton(
-                                      icon: Icons.delete,
-                                      label: 'Delete',
-                                      iconColor: Colors.red,
-                                      labelColor: Colors.red,
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        deleteImage();
-                                      },
+                                    const Divider(),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        ProfileOptionButton(
+                                          icon: Icons.camera_alt,
+                                          label: 'Camera',
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            userModel.selectImage(ImageSource.camera);
+                                          },
+                                        ),
+                                        ProfileOptionButton(
+                                          icon: Icons.photo,
+                                          label: 'Gallery',
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                            userModel.selectImage(ImageSource.gallery);
+                                          },
+                                        ),
+                                        if (userModel.user?.image != null)
+                                          ProfileOptionButton(
+                                            icon: Icons.delete,
+                                            label: 'Delete',
+                                            iconColor: Colors.red,
+                                            labelColor: Colors.red,
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                              userModel.deleteImage();
+                                            },
+                                          ),
+                                      ],
                                     ),
                                   ],
                                 ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
             const SizedBox(height: 16),

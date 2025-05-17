@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobileproj/portfolio/portfolio_widget/contact.dart';
-
 import '../portfolio_widget/portfolio_widget.dart';
 
 // ==================== Logic Part ====================
@@ -11,7 +9,7 @@ class MobilePhone {
   final double price;
   final String serialNumber;
 
-  //Const
+  // Def Constr
   MobilePhone({
     required this.brand,
     required this.model,
@@ -20,14 +18,14 @@ class MobilePhone {
     required this.serialNumber,
   });
 
-  // Named Constr
+  // Named Const
   MobilePhone.withDefaultStorage({
     required this.brand,
     required this.model,
     int? storage,
     this.price = 0.0,
     required this.serialNumber,
-  }) : storage = storage ?? 64; 
+  }) : storage = storage ?? 64; // lw b null
 
   // Const constr
   const MobilePhone.constant({
@@ -44,7 +42,7 @@ class MobilePhone {
     return 'MobilePhone(brand: $brand, model: $model, storage: ${storage ?? "Unknown"} GB, price: \$$price, serialNumber: $serialNumber)';
   }
 
-  
+  // 
   MobilePhone copyWith({
     String? brand,
     String? model,
@@ -61,7 +59,8 @@ class MobilePhone {
     );
   }
 }
-////////////
+
+// ==================== UI Part ====================
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
 
@@ -70,26 +69,26 @@ class PortfolioScreen extends StatefulWidget {
 }
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
-  String imagePath = 'assets/nada1.jpg'; 
+  String imagePath = 'assets/nada1.jpg'; // First image
 
   void changeImage() {
     setState(() {
       imagePath =
           imagePath == 'assets/nada1.jpg'
               ? 'assets/nada2.jpg'
-              : 'assets/nada1.jpg'; // Toggling
+              : 'assets/nada1.jpg'; // Toggle between two images
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    
+    // Example usage of Mob logic
     MobilePhone myPhone = MobilePhone.withDefaultStorage(
       brand: "Apple",
-      model: "iPhone 15",
-      price: 20000.99,
-      serialNumber: "XYZ123456",
-    )..toString(); 
+      model: "iPhone 16",
+      price: 20000,
+      serialNumber: "XYZ123697",
+    )..toString(); // Using cascade operator
     
 
     return Scaffold(
