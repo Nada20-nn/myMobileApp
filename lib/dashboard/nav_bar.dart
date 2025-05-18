@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobileproj/dashboard/dashboard_screen.dart';
 import 'package:mobileproj/favorite/favorite_screen.dart';
 import 'package:mobileproj/profile/profile_page/profile_page.dart';
+import 'package:mobileproj/quote/quote_screen.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -20,6 +21,7 @@ class _NavBarState extends State<NavBar> {
 
       body: [
         DashboardScreen(),
+        QuoteScreen(),
         FavoriteScreen(),
         ProfilePage(),
       ]
@@ -38,6 +40,7 @@ bottomNavigationBar: NavigationBar(
   
   destinations:[
   NavigationDestination(icon: Icon(Icons.dashboard), label: 'dashboard'),
+  NavigationDestination(icon: Icon(Icons.format_quote), label: 'Quote'),
   NavigationDestination(icon: Icon(Icons.favorite), label: 'favorite'),
   NavigationDestination(icon: Icon(Icons.person), label: 'Profile')
 ]),
